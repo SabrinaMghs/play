@@ -1,20 +1,43 @@
 .form {
   display: flex;
   gap: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  backdrop-filter: blur(10px);
 }
 
 .form input {
   flex: 1;
-  padding: 14px;
-  border: none;
-  border-radius: 10px;
+  background: rgba(255,255,255,0.04);
+  border-color: var(--border-strong);
 }
 
 .form button {
-  padding: 14px 24px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: bold;
+  background: var(--gradient);
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 11px 20px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  letter-spacing: 0.2px;
+  box-shadow: 0 2px 12px rgba(124, 58, 237, 0.35);
+}
+
+.form button:hover {
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.5);
+}
+
+@media (max-width: 640px) {
+  .form {
+    flex-direction: column;
+  }
+
+  .form button {
+    width: 100%;
+    padding: 13px;
+  }
 }

@@ -1,20 +1,36 @@
 .form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 4px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
 }
 
 .form input {
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
+  font-size: 13px;
+  padding: 10px 12px;
+}
+
+.form input:nth-child(1),
+.form input:nth-child(2) {
+  grid-column: span 1;
 }
 
 .form button {
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
+  grid-column: 1 / -1;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  margin-top: 2px;
+}
+
+.form button:hover {
+  background: rgba(255,255,255,0.09);
+  color: var(--text-h);
+  border-color: rgba(124,58,237,0.3);
 }
