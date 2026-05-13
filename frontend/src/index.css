@@ -109,3 +109,21 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0f172a;
+}
+
+button {
+  transition: 0.3s;
+}
+
+button:hover {
+  opacity: 0.8;
+}
