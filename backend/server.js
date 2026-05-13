@@ -1,22 +1,27 @@
-const express = require ('express');
-const playlistsRouter = require ('./routes');
-const app = express ();
+const express = require('express');
+const cors = require('cors');
+const playlistsRouter = require('./routes');
 
-app.use (express.json ());
-
-app.use ('/api/playlists', playlistsRouter);
-
+const app = express();
 const PORT = 3000;
 
-app.listen (PORT, () => {
-  console.log (`Servidor rodando na porta ${PORT}`);
+// Middlewares
+app.use(cors());
+app.use(express.json());
+
+// Rotas
+app.use('/api/playlists', playlistsRouter);
+
+// Inicialização do servidor
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
 });
 
-const cors = require('cors')
+/*
+Exemplo de JSON para teste:
 
-app.use(cors())
-
-// {
-//   "name": "Rock",
-//   "tags": ["rock", "metal"]
-// }
+{
+  "name": "Rock",
+  "tags": ["rock", "metal"]
+}
+*/
