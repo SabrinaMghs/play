@@ -1,4 +1,23 @@
+const fs = require('fs')
+const path = require('path')
+
+const dataPath = path.join(__dirname, 'playlists.json')
+
+// Carrega os dados do arquivo ao iniciar
 let playlists = []
+
+if (fs.existsSync(dataPath)) {
+  const data = fs.readFileSync(dataPath, 'utf-8')
+  playlists = JSON.parse(data)
+}
+
+// Função para salvar no arquivo
+function saveData() {
+  fs.writeFileSync(
+    dataPath,
+    JSON.stringify(playlists, null, 2)
+  )
+}
 
 function generateRandomID() {
   return Math.floor(Math.random() * 999999)
@@ -56,6 +75,9 @@ module.exports = {
 
     playlists.push(newPlaylist)
 
+    // salva no arquivo
+    saveData()
+
     res.status(201).json(newPlaylist)
   },
 
@@ -92,6 +114,9 @@ module.exports = {
       playlists[playlistIndex].tags = tags
     }
 
+    // salva no arquivo
+    saveData()
+
     res.json(playlists[playlistIndex])
   },
 
@@ -108,6 +133,9 @@ module.exports = {
     }
 
     const deletedPlaylist = playlists.splice(playlistIndex, 1)[0]
+
+    // salva no arquivo
+    saveData()
 
     res.json(deletedPlaylist)
   },
@@ -148,6 +176,9 @@ module.exports = {
 
     playlist.musics.push(newMusic)
 
+    // salva no arquivo
+    saveData()
+
     res.status(201).json(newMusic)
   },
 
@@ -176,6 +207,9 @@ module.exports = {
     }
 
     playlist.musics.splice(musicIndex, 1)
+
+    // salva no arquivo
+    saveData()
 
     res.status(204).end()
   }
