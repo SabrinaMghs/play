@@ -13,6 +13,15 @@ function PlaylistCard({ playlist, onDelete, refresh }) {
     }
   }
 
+  async function removeMusic(musicId) {
+    try {
+      await api.delete(`/playlists/${playlist.id}/musics/${musicId}`)
+      refresh()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div className={styles.card}>
       <div className={styles.top}>
@@ -39,6 +48,12 @@ function PlaylistCard({ playlist, onDelete, refresh }) {
             <small>
               {music.album} • {music.year}
             </small>
+            <button
+              className={styles.removeMusic}
+              onClick={() => removeMusic(music.id)}
+            >
+              ✕
+            </button>
           </div>
         ))}
       </div>

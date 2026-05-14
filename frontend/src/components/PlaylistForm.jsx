@@ -11,6 +11,7 @@ function PlaylistForm({ onSubmit }) {
     const formattedTags = tags
       .split(',')
       .map(tag => tag.trim())
+      .filter(tag => tag.length > 0)
 
     onSubmit({
       name,
