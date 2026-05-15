@@ -75,7 +75,6 @@ module.exports = {
 
     playlists.push(newPlaylist)
 
-    // salva no arquivo
     saveData()
 
     res.status(201).json(newPlaylist)
@@ -114,7 +113,6 @@ module.exports = {
       playlists[playlistIndex].tags = tags
     }
 
-    // salva no arquivo
     saveData()
 
     res.json(playlists[playlistIndex])
@@ -134,7 +132,6 @@ module.exports = {
 
     const deletedPlaylist = playlists.splice(playlistIndex, 1)[0]
 
-    // salva no arquivo
     saveData()
 
     res.json(deletedPlaylist)
@@ -176,7 +173,6 @@ module.exports = {
 
     playlist.musics.push(newMusic)
 
-    // salva no arquivo
     saveData()
 
     res.status(201).json(newMusic)
@@ -208,9 +204,65 @@ module.exports = {
 
     playlist.musics.splice(musicIndex, 1)
 
-    // salva no arquivo
     saveData()
 
     res.status(204).end()
+  },
+
+  // PUT /api/playlists/:playlistId/musics/:musicId
+  editMusic: (req, res) => {
+    const { playlistId, musicId } = req.params
+    const { title, year, artist, album } = req.body
+
+    const playlist = playlists.find(
+      pl => pl.id === +playlistId
+    )
+
+    if (!playlist) {
+      return res.status(404).json({
+        message: 'playlist not found'
+      })
+    }
+
+    const musicIndex = playlist.musics.findIndex(
+      music => music.id === +musicId
+    )
+
+    if (musicIndex === -1) {
+      return res.status(404).json({
+        message: 'music not found'
+      })
+    }
+
+    if (
+      (title !== undefined && typeof title !== 'string') ||
+      (year !== undefined && isNaN(Number(year))) ||
+      (artist !== undefined && typeof artist !== 'string') ||
+      (album !== undefined && typeof album !== 'string')
+    ) {
+      return res.status(400).json({
+        message: 'invalid fields'
+      })
+    }
+
+    if (title !== undefined) {
+      playlist.musics[musicIndex].title = title
+    }
+
+    if (year !== undefined) {
+      playlist.musics[musicIndex].year = Number(year)
+    }
+
+    if (artist !== undefined) {
+      playlist.musics[musicIndex].artist = artist
+    }
+
+    if (album !== undefined) {
+      playlist.musics[musicIndex].album = album
+    }
+
+    saveData()
+
+    res.json(playlist.musics[musicIndex])
   }
 }

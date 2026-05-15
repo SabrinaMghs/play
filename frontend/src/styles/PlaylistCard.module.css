@@ -1,33 +1,42 @@
+/* PlaylistCard.module.css */
+
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   padding: 24px;
   backdrop-filter: blur(12px);
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.25s,
+    box-shadow 0.25s,
+    transform 0.2s;
   display: flex;
   flex-direction: column;
   gap: 0;
+  overflow: hidden;
+  position: relative;
 }
 
 .card:hover {
   border-color: var(--border-strong);
   box-shadow: var(--shadow-glow);
+  transform: translateY(-2px);
 }
 
 .top {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 14px;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
 }
 
 .top h2 {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 700;
   color: var(--text-h);
-  letter-spacing: -0.3px;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
 }
 
 .top button {
@@ -35,100 +44,149 @@
   color: #f87171;
   border: 1px solid rgba(239, 68, 68, 0.2);
   font-size: 13px;
-  font-weight: 500;
-  padding: 6px 14px;
+  font-weight: 600;
+  padding: 8px 16px;
   border-radius: var(--radius-sm);
   flex-shrink: 0;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    transform 0.15s,
+    box-shadow 0.2s;
+}
+.editbutton {
+  background: rgba(255,255,255,0.05);
+  color: var(--text-h);
+  border: 1px solid var(--border);
 }
 
 .top button:hover {
   background: rgba(239, 68, 68, 0.18);
   border-color: rgba(239, 68, 68, 0.4);
   box-shadow: 0 0 12px rgba(239, 68, 68, 0.2);
+  transform: translateY(-1px);
 }
 
 .tags {
   display: flex;
-  gap: 6px;
+  gap: 8px;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .tags span {
   background: var(--accent-light);
   border: 1px solid var(--accent-border);
   color: #a78bfa;
-  padding: 4px 12px;
+  padding: 6px 13px;
   border-radius: 999px;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.2px;
+  backdrop-filter: blur(8px);
 }
 
 .musicList {
-  margin-top: 20px;
+  margin-top: 24px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
 }
 
 .musicCard {
   background: rgba(255,255,255,0.03);
   border: 1px solid var(--border);
-  padding: 14px 16px;
-  border-radius: var(--radius);
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  grid-template-rows: auto auto;
-  gap: 2px 8px;
-  transition: background 0.15s;
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    transform 0.15s,
+    box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
 }
 
 .musicCard:hover {
   background: rgba(255,255,255,0.05);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+}
+
+.musicCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.02),
+      transparent
+    );
+  pointer-events: none;
 }
 
 .musicCard h3 {
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
   color: var(--text-h);
-  grid-column: 1;
-  grid-row: 1;
+  line-height: 1.3;
+  margin: 0;
 }
 
 .musicCard p {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-muted);
-  grid-column: 1;
-  grid-row: 2;
+  margin: 0;
 }
 
 .musicCard small {
   font-size: 12px;
   color: var(--text-muted);
-  grid-column: 2;
-  grid-row: 1 / 3;
-  align-self: center;
-  text-align: right;
-  white-space: nowrap;
+  opacity: 0.85;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.editMusic,
+.removeMusic {
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 12px;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    transform 0.15s,
+    opacity 0.2s;
+}
+
+.editMusic {
+  background: rgba(255,255,255,0.05);
+  color: var(--text-h);
+  border: 1px solid var(--border);
+}
+
+.editMusic:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
 }
 
 .removeMusic {
-  grid-column: 3;
-  grid-row: 1 / 3;
-  align-self: center;
   background: rgba(239, 68, 68, 0.08);
   color: #f87171;
   border: 1px solid rgba(239, 68, 68, 0.15);
-  font-size: 12px;
-  width: 26px;
-  height: 26px;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   opacity: 0;
-  transition: opacity 0.15s, background 0.15s;
 }
 
 .musicCard:hover .removeMusic {
@@ -138,4 +196,55 @@
 .removeMusic:hover {
   background: rgba(239, 68, 68, 0.18) !important;
   border-color: rgba(239, 68, 68, 0.35) !important;
+  transform: translateY(-1px);
+}
+
+.musicCard input {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  color: var(--text-h);
+  padding: 11px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  transition:
+    border-color 0.2s,
+    background 0.2s,
+    box-shadow 0.2s;
+}
+
+.musicCard input:focus {
+  outline: none;
+  border-color: var(--border-strong);
+  background: rgba(255,255,255,0.06);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
+
+.musicCard button {
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding: 18px;
+  }
+
+  .top {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .top button {
+    width: 100%;
+  }
+
+  .actions {
+    width: 100%;
+  }
+
+  .editMusic,
+  .removeMusic {
+    flex: 1;
+    justify-content: center;
+  }
 }
