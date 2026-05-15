@@ -2,15 +2,10 @@
   {
     "id": 12345,
     "name": "Rock",
-    "tags": ["rock", "classic"],
-    "musics": [
-      {
-        "id": 999,
-        "title": "Numb",
-        "year": 2003,
-        "artist": "Linkin Park",
-        "album": "Meteora"
-      }
-    ]
+    "tags": [
+      "rock",
+      "classic"
+    ],
+    "musics": []
   }
 ]
